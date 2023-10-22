@@ -20,18 +20,22 @@ class Like extends Model {
                 references: {
                     model: User,  // Reference the User model directly
                     key: 'id'
-                }
+                },
+                onDelete:'CASCADE'
             },
             productId: {
                 type: DataTypes.INTEGER,
                 references: {
                     model: Product,  // Reference the Product model directly
                     key: 'id'
-                }
+                },
+                onDelete:'CASCADE'
             }
         }, {
             sequelize,
-            modelName: 'like'
+            modelName: 'like',
+            paranoid:true
+
         });
     }
 }

@@ -25,7 +25,8 @@ class Payment extends Model {
                 references: {
                     model: User,
                     key: 'id'
-                }
+                },
+                onDelete:'CASCADE'
             },
             productId: {
                 type: DataTypes.INTEGER,
@@ -33,7 +34,8 @@ class Payment extends Model {
                 references: {
                     model: Product,  // Reference the Product model directly
                     key: 'id'
-                }
+                },
+                onDelete:'CASCADE'
             },
             amount: {
                 type: DataTypes.FLOAT,
@@ -57,7 +59,9 @@ class Payment extends Model {
             }
         }, {
             sequelize,
-            modelName: 'payment'
+            modelName: 'payment',
+            paranoid:true
+
         });
     }
 }

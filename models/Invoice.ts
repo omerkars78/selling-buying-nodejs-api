@@ -26,14 +26,16 @@ class Invoice extends Model {
                 references: {
                     model: User,  // Reference the User model directly
                     key: 'id'
-                }
+                },
+                onDelete:'CASCADE'
             },
             paymentId: {
                 type: DataTypes.INTEGER,
                 references: {
                     model: Payment,  // Reference the Payment model directly
                     key: 'id'
-                }
+                },
+                onDelete:'CASCADE'
             },
             invoiceNumber: {
                 type: DataTypes.STRING,
@@ -61,7 +63,9 @@ class Invoice extends Model {
             }
         }, {
             sequelize,
-            modelName: 'invoice'
+            modelName: 'invoice',
+            paranoid:true
+
         });
     }
 }

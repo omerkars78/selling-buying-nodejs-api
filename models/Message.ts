@@ -20,14 +20,16 @@ class Message extends Model {
                 references: {
                     model: User,  // Reference the User model directly
                     key: 'id'
-                }
+                },
+                onDelete:'CASCADE'
             },
             receiverId: {
                 type: DataTypes.INTEGER.UNSIGNED,
                 references: {
                     model: User,  // Reference the User model directly
                     key: 'id'
-                }
+                },
+                onDelete:'CASCADE'
             },
             content: {
                 type: DataTypes.TEXT,
@@ -35,7 +37,9 @@ class Message extends Model {
             }
         }, {
             sequelize,
-            modelName: 'message'
+            modelName: 'message',
+            paranoid:true
+
         });
     }
 }

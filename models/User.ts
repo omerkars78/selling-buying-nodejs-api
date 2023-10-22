@@ -26,6 +26,14 @@ class User extends Model {
                 type: new DataTypes.STRING(128),
                 allowNull: false,
             },
+            studentEmail: {
+                type: new DataTypes.STRING(128),
+                allowNull: true,
+            },
+            phoneNumber:{
+                type: new DataTypes.STRING(128),
+                allowNull: true,
+            },
             password: {
                 type: new DataTypes.STRING(128),
                 allowNull: false,
@@ -44,12 +52,14 @@ class User extends Model {
                 defaultValue: false, // Eğer kullanıcı doğrulanmadıysa default değeri false olarak alabilirsiniz.
             },
             userType: {
-                type: DataTypes.STRING(128),
-                allowNull: true,
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: false, 
             }
         }, {
             tableName: 'users',
             sequelize: sequelize,  // this bit is important
+            paranoid:true
         });
     }
 }

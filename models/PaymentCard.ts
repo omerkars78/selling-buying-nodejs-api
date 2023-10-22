@@ -22,7 +22,8 @@ class PaymentCard extends Model {
                 references: {
                     model: User,
                     key: 'id'
-                }
+                },
+                onDelete:'CASCADE'
             },
             lastFour: {
                 type: DataTypes.STRING(4),
@@ -42,7 +43,9 @@ class PaymentCard extends Model {
             }
         }, {
             sequelize,
-            modelName: 'paymentCard'
+            modelName: 'paymentCard',
+            paranoid:true
+
         });
     }
 }

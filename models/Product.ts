@@ -23,7 +23,8 @@ class Product extends Model {
                 references: {
                     model: User,
                     key: 'id'
-                }
+                },
+                onDelete:'CASCADE'
             },
             title: {
                 type: DataTypes.STRING,
@@ -47,7 +48,9 @@ class Product extends Model {
             }
         }, {
             sequelize,
-            modelName: 'product'
+            modelName: 'product',
+            paranoid:true
+
         });
     }
 }

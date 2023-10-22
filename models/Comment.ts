@@ -21,14 +21,17 @@ class Comment extends Model {
                 references: {
                     model: User,  // Reference the User model directly
                     key: 'id'
-                }
+                },
+                onDelete:'CASCADE'
+
             },
             productId: {
                 type: DataTypes.INTEGER,
                 references: {
                     model: Product,  // Reference the Product model directly
                     key: 'id'
-                }
+                },
+                onDelete:'CASCADE'
             },
             content: {
                 type: DataTypes.TEXT,
@@ -36,8 +39,11 @@ class Comment extends Model {
             }
         }, {
             sequelize,
-            modelName: 'comment'
-        });
+            modelName: 'comment',
+            paranoid:true
+
+        }
+        );
     }
 }
 
