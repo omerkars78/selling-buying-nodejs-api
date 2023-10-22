@@ -19,9 +19,9 @@ class Product extends Model {
                 primaryKey: true
             },
             userId: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,  // UNSIGNED added here
                 references: {
-                    model: User,  // Reference the User model directly
+                    model: User,
                     key: 'id'
                 }
             },

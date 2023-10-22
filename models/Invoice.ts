@@ -22,7 +22,7 @@ class Invoice extends Model {
                 primaryKey: true
             },
             userId: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,
                 references: {
                     model: User,  // Reference the User model directly
                     key: 'id'

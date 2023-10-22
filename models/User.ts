@@ -30,7 +30,23 @@ class User extends Model {
                 type: new DataTypes.STRING(128),
                 allowNull: false,
             },
-            // ... other field definitions
+            profileImage: {
+                type: DataTypes.STRING(256), // Varsayılan uzunluğu 256 olarak aldım, ihtiyacınıza göre değiştirebilirsiniz.
+                allowNull: true,
+            },
+            verificationCode: {
+                type: DataTypes.STRING(128),
+                allowNull: true,
+            },
+            verified: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: false, // Eğer kullanıcı doğrulanmadıysa default değeri false olarak alabilirsiniz.
+            },
+            userType: {
+                type: DataTypes.STRING(128),
+                allowNull: true,
+            }
         }, {
             tableName: 'users',
             sequelize: sequelize,  // this bit is important

@@ -16,14 +16,14 @@ class Message extends Model {
                 primaryKey: true
             },
             senderId: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,
                 references: {
                     model: User,  // Reference the User model directly
                     key: 'id'
                 }
             },
             receiverId: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,
                 references: {
                     model: User,  // Reference the User model directly
                     key: 'id'

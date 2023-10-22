@@ -1,4 +1,3 @@
-import { Sequelize } from 'sequelize';
 import sequelize from '../config/database';
 
 import UserModel from './User';
@@ -9,58 +8,67 @@ import CommentModel from './comment';
 import PaymentModel from './Payment';
 import InvoiceModel from './Invoice';
 import PaymentCardModel from './PaymentCard';
-const User = new UserModel(sequelize);
-const Product = new ProductModel(sequelize, User);
-const Message = new MessageModel(sequelize, User);
-const Like = new LikeModel(sequelize, User, Product);
-const Comment = new CommentModel(sequelize, User, Product);
-const Payment = new PaymentModel(sequelize, User, Product);
-const Invoice = new InvoiceModel(sequelize, User, Payment);
-const PaymentCard = new PaymentCardModel(sequelize, User);
 
+// Models Initialization
+const initializeModels = () => {
+    UserModel.initialize(sequelize);
+    ProductModel.initialize(sequelize);
+    MessageModel.initialize(sequelize);
+    LikeModel.initialize(sequelize);
+    CommentModel.initialize(sequelize);
+    PaymentModel.initialize(sequelize);
+    InvoiceModel.initialize(sequelize);
+    PaymentCardModel.initialize(sequelize);
+}
 
-// Relations
-User.hasMany(Product, { foreignKey: 'userId' });
-Product.belongsTo(User, { foreignKey: 'userId' });
+// Relations Setup
+const setupRelations = () => {
+    UserModel.hasMany(ProductModel, { foreignKey: 'userId' });
+    ProductModel.belongsTo(UserModel, { foreignKey: 'userId' });
 
-User.hasMany(Message, { foreignKey: 'senderId' });
-Message.belongsTo(User, { foreignKey: 'senderId' });
+    UserModel.hasMany(MessageModel, { foreignKey: 'senderId' });
+    MessageModel.belongsTo(UserModel, { foreignKey: 'senderId' });
 
-User.hasMany(Like, { foreignKey: 'userId' });
-Like.belongsTo(User, { foreignKey: 'userId' });
+    UserModel.hasMany(LikeModel, { foreignKey: 'userId' });
+    LikeModel.belongsTo(UserModel, { foreignKey: 'userId' });
 
-Product.hasMany(Like, { foreignKey: 'productId' });
-Like.belongsTo(Product, { foreignKey: 'productId' });
+    ProductModel.hasMany(LikeModel, { foreignKey: 'productId' });
+    LikeModel.belongsTo(ProductModel, { foreignKey: 'productId' });
 
-User.hasMany(Comment, { foreignKey: 'userId' });
-Comment.belongsTo(User, { foreignKey: 'userId' });
+    UserModel.hasMany(CommentModel, { foreignKey: 'userId' });
+    CommentModel.belongsTo(UserModel, { foreignKey: 'userId' });
 
-Product.hasMany(Comment, { foreignKey: 'productId' });
-Comment.belongsTo(Product, { foreignKey: 'productId' });
+    ProductModel.hasMany(CommentModel, { foreignKey: 'productId' });
+    CommentModel.belongsTo(ProductModel, { foreignKey: 'productId' });
 
-User.hasMany(Payment, { foreignKey: 'userId' });
-Payment.belongsTo(User, { foreignKey: 'userId' });
+    UserModel.hasMany(PaymentModel, { foreignKey: 'userId' });
+    PaymentModel.belongsTo(UserModel, { foreignKey: 'userId' });
 
-Product.hasMany(Payment, { foreignKey: 'productId' });
-Payment.belongsTo(Product, { foreignKey: 'productId' });
+    ProductModel.hasMany(PaymentModel, { foreignKey: 'productId' });
+    PaymentModel.belongsTo(ProductModel, { foreignKey: 'productId' });
 
-User.hasMany(Invoice, { foreignKey: 'userId' });
-Invoice.belongsTo(User, { foreignKey: 'userId' });
+    UserModel.hasMany(InvoiceModel, { foreignKey: 'userId' });
+    InvoiceModel.belongsTo(UserModel, { foreignKey: 'userId' });
 
-Payment.hasOne(Invoice, { foreignKey: 'paymentId' });
-Invoice.belongsTo(Payment, { foreignKey: 'paymentId' });
+    PaymentModel.hasOne(InvoiceModel, { foreignKey: 'paymentId' });
+    InvoiceModel.belongsTo(PaymentModel, { foreignKey: 'paymentId' });
 
-User.hasMany(PaymentCard, { foreignKey: 'userId' });
-PaymentCard.belongsTo(User, { foreignKey: 'userId' });
+    UserModel.hasMany(PaymentCardModel, { foreignKey: 'userId' });
+    PaymentCardModel.belongsTo(UserModel, { foreignKey: 'userId' });
+}
+
+// Initialize and Setup
+initializeModels();
+setupRelations();
 
 export {
-    User,
-    Product,
-    Message,
-    Like,
-    Comment,
-    Payment,
-    Invoice,
-    PaymentCard,
+    UserModel as User,
+    ProductModel as Product,
+    MessageModel as Message,
+    LikeModel as Like,
+    CommentModel as Comment,
+    PaymentModel as Payment,
+    InvoiceModel as Invoice,
+    PaymentCardModel as PaymentCard,
     sequelize
 };
