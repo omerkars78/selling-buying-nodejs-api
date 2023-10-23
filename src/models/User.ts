@@ -51,6 +51,11 @@ class User extends Model {
                 allowNull: false,
                 defaultValue: false, // Eğer kullanıcı doğrulanmadıysa default değeri false olarak alabilirsiniz.
             },
+            isAdmin: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: false, // Eğer kullanıcı doğrulanmadıysa default değeri false olarak alabilirsiniz.
+            },
             userType: {
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
