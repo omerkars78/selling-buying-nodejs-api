@@ -6,6 +6,7 @@ import MessageModel from './message';
 import LikeModel from './like';
 import CommentModel from './comment';
 import PaymentModel from './Payment';
+import GenderModel from './Gender'
 import InvoiceModel from './Invoice';
 import PaymentCardModel from './PaymentCard';
 import BlockModel from './Block';
@@ -15,6 +16,7 @@ import CommentProductModel from './CommentProduct';
 
 // Models Initialization
 const initializeModels = () => {
+    GenderModel.initialize(sequelize);
     UserModel.initialize(sequelize);
     ProductModel.initialize(sequelize);
     MessageModel.initialize(sequelize);
@@ -45,6 +47,10 @@ const setupRelations = () => {
 
     UserModel.hasMany(CommentModel, { foreignKey: 'userId' });
     CommentModel.belongsTo(UserModel, { foreignKey: 'userId' });
+
+    UserModel.belongsTo(GenderModel, { foreignKey: 'genderId' });
+    GenderModel.hasMany(UserModel, { foreignKey: 'genderId' });
+    
 
     // ProductModel.hasMany(CommentModel, { foreignKey: 'productId' });
     // CommentModel.belongsTo(ProductModel, { foreignKey: 'productId' });
@@ -86,6 +92,7 @@ initializeModels();
 setupRelations();
 
 export {
+    GenderModel as Gender,
     UserModel as User,
     ProductModel as Product,
     MessageModel as Message,

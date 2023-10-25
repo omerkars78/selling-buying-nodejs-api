@@ -1,6 +1,6 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import sequelize from '../config/database';  // Corrected import
-
+import Gender from './Gender';  
 class User extends Model {
     public id!: number;
     public name!: string;
@@ -21,6 +21,18 @@ class User extends Model {
             name: {
                 type: new DataTypes.STRING(128),
                 allowNull: false,
+            },
+            genderId:{
+                type: DataTypes.INTEGER.UNSIGNED,
+                references: {
+                    model: Gender,  
+                    key: 'id'
+                },
+                onDelete:'CASCADE'
+            },
+            birthday: {
+                type: DataTypes.DATE,
+                allowNull: true,
             },
             email: {
                 type: new DataTypes.STRING(128),
@@ -60,6 +72,30 @@ class User extends Model {
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
                 defaultValue: false, 
+            },
+            country: {
+                type: new DataTypes.STRING(128),
+                allowNull: true,
+            },
+            city: {
+                type: new DataTypes.STRING(128),
+                allowNull: true,
+            },
+            district: {
+                type: new DataTypes.STRING(128),
+                allowNull: true,
+            },
+            school: {
+                type: new DataTypes.STRING(128),
+                allowNull: true,
+            },
+            department: {
+                type: new DataTypes.STRING(128),
+                allowNull: true,
+            },
+            detailedAddress: {
+                type: new DataTypes.STRING(512), 
+                allowNull: true,
             }
         }, {
             tableName: 'users',
