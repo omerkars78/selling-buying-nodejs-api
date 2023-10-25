@@ -1,6 +1,7 @@
 import { Model, DataTypes, Sequelize } from 'sequelize';
 import sequelize from '../config/database';  // Corrected import
 import User from './User';
+import ProductCategory from './ProductCategory';
 
 class Product extends Model {
     public id!: number;
@@ -26,6 +27,14 @@ class Product extends Model {
                 },
                 onDelete:'CASCADE'
             },
+            productCategoryId: {
+                type: DataTypes.INTEGER.UNSIGNED,  // UNSIGNED added here
+                references: {
+                    model: ProductCategory,
+                    key: 'id'
+                },
+                onDelete:'CASCADE'
+            },
             title: {
                 type: DataTypes.STRING,
                 allowNull: false
@@ -45,7 +54,23 @@ class Product extends Model {
             is_sold: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false
-            }
+            },
+            country: {
+                type: new DataTypes.STRING(128),
+                allowNull: true,
+            },
+            city: {
+                type: new DataTypes.STRING(128),
+                allowNull: true,
+            },
+            district: {
+                type: new DataTypes.STRING(128),
+                allowNull: true,
+            },
+            school: {
+                type: new DataTypes.STRING(128),
+                allowNull: true,
+            },
         }, {
             sequelize,
             modelName: 'product',

@@ -14,8 +14,10 @@ import ReportModel from './Report';
 import UserProductModel from './UserProduct';
 import CommentProductModel from './CommentProduct';
 import UserCommentModel from './UserComment';
+import ProductCategoryModel from './ProductCategory';
 // Models Initialization
 const initializeModels = () => {
+    ProductCategoryModel.initialize(sequelize);
     GenderModel.initialize(sequelize);
     UserModel.initialize(sequelize);
     ProductModel.initialize(sequelize);
@@ -51,6 +53,9 @@ const setupRelations = () => {
 
     UserModel.belongsTo(GenderModel, { foreignKey: 'genderId' });
     GenderModel.hasMany(UserModel, { foreignKey: 'genderId' });
+
+    ProductModel.belongsTo(ProductCategoryModel, { foreignKey: 'productCategoryId' });
+    ProductCategoryModel.hasMany(ProductModel, { foreignKey: 'productCategoryId' });
     
 
     // ProductModel.hasMany(CommentModel, { foreignKey: 'productId' });
@@ -110,5 +115,6 @@ export {
     UserProductModel as UserProduct,
     CommentProductModel as CommentProduct,
     UserCommentModel as UserComment,
+    ProductCategoryModel as ProductCategory,
     sequelize
 };

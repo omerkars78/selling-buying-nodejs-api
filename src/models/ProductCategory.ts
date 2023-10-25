@@ -2,12 +2,12 @@ import { Model, DataTypes, Sequelize } from 'sequelize';
 import sequelize from '../config/database';  // Corrected import
 
 
-class Gender extends Model {
+class ProductCategory extends Model {
     public id!: number;
     public gender!: string;
 
     public static initialize(sequelize: Sequelize) {
-        Gender.init({
+       ProductCategory.init({
             id: {
                 type: DataTypes.INTEGER,
                 autoIncrement: true,
@@ -20,11 +20,11 @@ class Gender extends Model {
             }
         }, {
             sequelize,
-            modelName: 'gender',
+            modelName: 'product_categories',
         
         }
         );
     }
 }
 
-export default Gender;
+export default ProductCategory;
