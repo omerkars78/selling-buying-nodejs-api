@@ -2,9 +2,9 @@ import sequelize from '../config/database';
 
 import UserModel from './User';
 import ProductModel from './Product';
-import MessageModel from './message';
-import LikeModel from './like';
-import CommentModel from './comment';
+import MessageModel from './Message';
+import LikeModel from './Like';
+import CommentModel from './Comment';
 import PaymentModel from './Payment';
 import GenderModel from './Gender'
 import InvoiceModel from './Invoice';
@@ -14,13 +14,13 @@ import ReportModel from './Report';
 import UserProductModel from './UserProduct';
 import CommentProductModel from './CommentProduct';
 import UserCommentModel from './UserComment';
+import BlogCommentModel from './UserComment';
 import ProductCategoryModel from './ProductCategory';
 import BlogModel from './Blog';
 import BlogCategoryModel from './BlogCategory';
 // Models Initialization
 const initializeModels = () => {
-    BlogModel.initialize(sequelize);
-    BlogCategoryModel.initialize(sequelize);
+   
     ProductCategoryModel.initialize(sequelize);
     GenderModel.initialize(sequelize);
     UserModel.initialize(sequelize);
@@ -32,10 +32,13 @@ const initializeModels = () => {
     InvoiceModel.initialize(sequelize);
     PaymentCardModel.initialize(sequelize);
     BlockModel.initialize(sequelize);
+    BlogCategoryModel.initialize(sequelize);
+    BlogModel.initialize(sequelize);
     ReportModel.initialize(sequelize);
     UserProductModel.initialize(sequelize);
     CommentProductModel.initialize(sequelize);
     UserCommentModel.initialize(sequelize);
+    BlogCommentModel.initialize(sequelize);
 }
 
 // Relations Setup
@@ -99,11 +102,12 @@ const setupRelations = () => {
 
     UserModel.belongsToMany(CommentModel, { through: UserCommentModel, foreignKey: 'userId' });
     CommentModel.belongsToMany(UserModel, { through: UserCommentModel, foreignKey: 'commentId' });
+    
+    BlogModel.belongsToMany(CommentModel, { through: BlogCommentModel, foreignKey: 'blogId' });
+    CommentModel.belongsToMany(BlogModel, { through: BlogCommentModel, foreignKey: 'commentId' });
 
     CommentModel.belongsToMany(ProductModel, { through: CommentProductModel, foreignKey: 'commentId' });
     ProductModel.belongsToMany(CommentModel, { through: CommentProductModel, foreignKey: 'productId' });
-
-
 
 }
 
@@ -129,5 +133,6 @@ export {
     ProductCategoryModel as ProductCategory,
     BlogModel as Blog,
     BlogCategoryModel as BlogCategory,
+    BlogCommentModel as BlogModel,
     sequelize
 };

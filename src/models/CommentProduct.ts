@@ -1,5 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import Comment from './comment';
+import Comment from './Comment';
 import Product from './Product';
 
 
@@ -28,7 +28,7 @@ class CommentProduct extends Model {
         }, {
             tableName: 'comment_product',
             sequelize: sequelize,
-            timestamps: false, 
+            paranoid:true
         });
     }
 }

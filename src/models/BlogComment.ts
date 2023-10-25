@@ -1,36 +1,36 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import Comment from './Comment';
-import User from './User';
+import Blog from './Blog';
 
-class UserComment extends Model {
-    public userId!: number;
+
+class BlogComment extends Model {
     public commentId!: number;
+    public blogId!: number;
 
     public static initialize(sequelize: Sequelize) {
-        UserComment.init({
-            userId: {
-                type: DataTypes.INTEGER.UNSIGNED,
-                references: {
-                    model: User,
-                    key: 'id'
-                },
-                primaryKey: true
-            },
+        BlogComment.init({
             commentId: {
                 type: DataTypes.INTEGER.UNSIGNED,
+                primaryKey: true,
                 references: {
                     model: Comment,
                     key: 'id'
                 },
-                primaryKey: true
+            },
+            blogId: {
+                type: DataTypes.INTEGER.UNSIGNED,
+                primaryKey: true,
+                references: {
+                    model: Blog,
+                    key: 'id'
+                }
             }
         }, {
-            sequelize,
-            modelName: 'userComment',
-            timestamps: true,
+            tableName: 'comment_blog',
+            sequelize: sequelize,
             paranoid:true
         });
     }
 }
 
-export default UserComment;
+export default BlogComment;

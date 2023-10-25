@@ -28,7 +28,7 @@ class User extends Model {
                     model: Gender,  
                     key: 'id'
                 },
-                onDelete:'CASCADE'
+              
             },
             birthday: {
                 type: DataTypes.DATE,
