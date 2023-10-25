@@ -1,29 +1,27 @@
 import User from '../models/User';
 
 class UserService {
-    // Kullanıcı oluşturma
+    // create user
     static async createUser(userData: any): Promise<User> {
         return await User.create(userData);
     }
 
-// Kullanıcı bilgilerini güncelleme
-static async updateUser(userId: number, updateData: any): Promise<number> {
-    const affectedCount = await User.update(updateData, {
-        where: {
-            id: userId
-        }
-    });
-    return affectedCount[0];
-}
+    // update user
+    static async updateUser(userId: number, updateData: any): Promise<number> {
+        const affectedCount = await User.update(updateData, {
+            where: {
+                id: userId
+            }
+        });
+        return affectedCount[0];
+    }
 
-
-
-    // Kullanıcıyı ID ile al
+    // get users informations by id 
     static async getUserById(userId: number): Promise<User | null> {
         return await User.findByPk(userId);
     }
 
-    // Kullanıcıyı e-posta ile al
+    // get user's email by id 
     static async getUserByEmail(email: string): Promise<User | null> {
         return await User.findOne({
             where: {
@@ -32,7 +30,7 @@ static async updateUser(userId: number, updateData: any): Promise<number> {
         });
     }
 
-    // Tüm kullanıcıları listele
+    // get all users
     static async getAllUsers(): Promise<User[]> {
         return await User.findAll();
     }
@@ -46,7 +44,7 @@ static async updateUser(userId: number, updateData: any): Promise<number> {
         });
     }
 
-    
+
 }
 
 export default UserService;

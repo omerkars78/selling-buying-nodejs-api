@@ -5,8 +5,7 @@ import Product from './Product';  // Import the Product model
 
 class Comment extends Model {
     public id!: number;
-    public userId!: number;
-    public productId!: number;
+    public rating! : number;
     public content!: string;
 
     public static initialize(sequelize: Sequelize) {

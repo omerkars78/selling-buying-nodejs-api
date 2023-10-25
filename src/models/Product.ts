@@ -11,6 +11,10 @@ class Product extends Model {
     public price!: number;
     public image?: string;
     public is_sold!: boolean;
+    public country?: string;
+    public city!: string;
+    public dsitrict?: string;
+    public school!: string;
 
     public static initialize(sequelize: Sequelize) {
         Product.init({

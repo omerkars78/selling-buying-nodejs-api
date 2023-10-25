@@ -4,13 +4,19 @@ import Gender from './Gender';
 class User extends Model {
     public id!: number;
     public name!: string;
+    public genderId!: number;
+    public birthday!: Date;
     public email!: string;
     public password!: string;
     public profileImage?: string;
     public verificationCode?: string;
     public verified!: boolean;
     public userType?: string;
-
+    public country?: string;
+    public city!: string;
+    public dsitrict?: string;
+    public school!: string;
+    public detailedAddress! : string;
     public static initialize(sequelize: Sequelize) {
         User.init({
             id: {

@@ -5,8 +5,7 @@ import Product from './Product';  // Import the Product model
 
 class Like extends Model {
     public id!: number;
-    public userId!: number;
-    public productId!: number;
+
 
     public static initialize(sequelize: Sequelize) {
         Like.init({
