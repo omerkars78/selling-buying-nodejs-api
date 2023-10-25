@@ -13,7 +13,7 @@ import BlockModel from './Block';
 import ReportModel from './Report';
 import UserProductModel from './UserProduct';
 import CommentProductModel from './CommentProduct';
-
+import UserCommentModel from './UserComment';
 // Models Initialization
 const initializeModels = () => {
     GenderModel.initialize(sequelize);
@@ -29,6 +29,7 @@ const initializeModels = () => {
     ReportModel.initialize(sequelize);
     UserProductModel.initialize(sequelize);
     CommentProductModel.initialize(sequelize);
+    UserCommentModel.initialize(sequelize);
 }
 
 // Relations Setup
@@ -83,6 +84,9 @@ const setupRelations = () => {
     UserModel.belongsToMany(ProductModel, { through: UserProductModel, foreignKey: 'userId' });
     ProductModel.belongsToMany(UserModel, { through: UserProductModel, foreignKey: 'productId' });
 
+    UserModel.belongsToMany(CommentModel, { through: UserCommentModel, foreignKey: 'userId' });
+    CommentModel.belongsToMany(UserModel, { through: UserCommentModel, foreignKey: 'commentId' });
+
     CommentModel.belongsToMany(ProductModel, { through: CommentProductModel, foreignKey: 'commentId' });
     ProductModel.belongsToMany(CommentModel, { through: CommentProductModel, foreignKey: 'productId' });
 }
@@ -105,5 +109,6 @@ export {
     ReportModel as Report,
     UserProductModel as UserProduct,
     CommentProductModel as CommentProduct,
+    UserCommentModel as UserComment,
     sequelize
 };

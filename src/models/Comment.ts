@@ -36,6 +36,10 @@ class Comment extends Model {
             content: {
                 type: DataTypes.TEXT,
                 allowNull: false
+            },
+            rating: {
+                type: DataTypes.FLOAT,  
+                allowNull: true
             }
         }, {
             sequelize,
