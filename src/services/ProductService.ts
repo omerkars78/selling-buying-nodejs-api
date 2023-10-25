@@ -59,7 +59,7 @@ class ProductService {
                 price: price
             },
             order: [
-                ['price', 'ASC']
+                ['price', 'DESC']
             ]
         });
     }
@@ -212,6 +212,108 @@ class ProductService {
             ]
         });
 
+        return products;
+    }
+
+    // Country ASC
+    static async getProductByCountryAsc(country: string): Promise<Product[]> {
+        const products = await Product.findAll({
+            where: {
+                country: country
+            },
+            order: [
+                ['country', 'ASC']
+            ]
+        });
+        return products;
+    }
+
+    // Country DESC
+    static async getProductByCountryDesc(country: string): Promise<Product[]> {
+        const products = await Product.findAll({
+            where: {
+                country: country
+            },
+            order: [
+                ['country', 'DESC']
+            ]
+        });
+        return products;
+    }
+
+    // City ASC
+    static async getProductByCityAsc(city: string): Promise<Product[]> {
+        const products = await Product.findAll({
+            where: {
+                city: city
+            },
+            order: [
+                ['city', 'ASC']
+            ]
+        });
+        return products;
+    }
+
+    // City DESC
+    static async getProductByCityDesc(city: string): Promise<Product[]> {
+        const products = await Product.findAll({
+            where: {
+                city: city
+            },
+            order: [
+                ['city', 'DESC']
+            ]
+        });
+        return products;
+    }
+    // District ASC
+    static async getProductByDistrictAsc(district: string): Promise<Product[]> {
+        const products = await Product.findAll({
+            where: {
+                district: district
+            },
+            order: [
+                ['district', 'ASC']
+            ]
+        });
+        return products;
+    }
+
+    // District DESC
+    static async getProductByDistrictDesc(district: string): Promise<Product[]> {
+        const products = await Product.findAll({
+            where: {
+                district: district
+            },
+            order: [
+                ['district', 'DESC']
+            ]
+        });
+        return products;
+    }
+    // School ASC
+    static async getProductBySchoolAsc(school: string): Promise<Product[]> {
+        const products = await Product.findAll({
+            where: {
+                school: school
+            },
+            order: [
+                ['school', 'ASC']
+            ]
+        });
+        return products;
+    }
+
+    // School DESC
+    static async getProductBySchoolDesc(school: string): Promise<Product[]> {
+        const products = await Product.findAll({
+            where: {
+                school: school
+            },
+            order: [
+                ['school', 'DESC']
+            ]
+        });
         return products;
     }
 

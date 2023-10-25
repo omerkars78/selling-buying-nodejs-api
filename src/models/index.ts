@@ -1,5 +1,4 @@
 import sequelize from '../config/database';
-
 import UserModel from './User';
 import ProductModel from './Product';
 import MessageModel from './Message';
@@ -110,7 +109,6 @@ const setupRelations = () => {
    
     ReportCategoryModel.hasMany(ReportModel, { foreignKey: 'reportCategoryId' });
     ReportModel.belongsTo(ReportCategoryModel, { foreignKey: 'reportCategoryId' });
-
 
     UserModel.belongsToMany(ProductModel, { through: UserProductModel, foreignKey: 'userId' });
     ProductModel.belongsToMany(UserModel, { through: UserProductModel, foreignKey: 'productId' });

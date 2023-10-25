@@ -46,7 +46,7 @@ static async updateUser(userId: number, updateData: any): Promise<number> {
         });
     }
 
-    // Diğer fonksiyonları da buraya ekleyebilirsiniz.
+    
 }
 
 export default UserService;
