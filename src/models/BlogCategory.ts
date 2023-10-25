@@ -8,7 +8,7 @@ class BlogCategory extends Model {
     public static initialize(sequelize: Sequelize) {
         BlogCategory.init({
             id: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,
                 autoIncrement: true,
                 primaryKey: true
             },

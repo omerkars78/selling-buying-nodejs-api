@@ -29,7 +29,7 @@ class Block extends Model {
                 allowNull: false,
             },
         }, {
-            tableName: 'blocks',
+            tableName: 'block',
             sequelize: sequelize,  // this bit is important
             paranoid: true
         });

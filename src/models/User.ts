@@ -22,13 +22,13 @@ class User extends Model {
                 type: new DataTypes.STRING(128),
                 allowNull: false,
             },
-            genderId:{
-                type: DataTypes.INTEGER.UNSIGNED,
+            genderId: {
+                type: DataTypes.INTEGER.UNSIGNED,  
                 references: {
-                    model: Gender,  
+                    model: Gender,
                     key: 'id'
                 },
-              
+                onDelete:'CASCADE'
             },
             birthday: {
                 type: DataTypes.DATE,

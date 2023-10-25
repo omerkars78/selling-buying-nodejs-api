@@ -9,7 +9,7 @@ class ProductCategory extends Model {
     public static initialize(sequelize: Sequelize) {
        ProductCategory.init({
             id: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,
                 autoIncrement: true,
                 primaryKey: true
             },
@@ -20,7 +20,7 @@ class ProductCategory extends Model {
             }
         }, {
             sequelize,
-            modelName: 'product_categories',
+            modelName: 'product_category',
         
         }
         );

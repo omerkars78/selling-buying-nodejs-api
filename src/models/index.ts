@@ -20,25 +20,31 @@ import BlogModel from './Blog';
 import BlogCategoryModel from './BlogCategory';
 // Models Initialization
 const initializeModels = () => {
-   
-    ProductCategoryModel.initialize(sequelize);
-    GenderModel.initialize(sequelize);
-    UserModel.initialize(sequelize);
-    ProductModel.initialize(sequelize);
-    MessageModel.initialize(sequelize);
-    LikeModel.initialize(sequelize);
-    CommentModel.initialize(sequelize);
-    PaymentModel.initialize(sequelize);
-    InvoiceModel.initialize(sequelize);
-    PaymentCardModel.initialize(sequelize);
-    BlockModel.initialize(sequelize);
-    BlogCategoryModel.initialize(sequelize);
-    BlogModel.initialize(sequelize);
-    ReportModel.initialize(sequelize);
-    UserProductModel.initialize(sequelize);
-    CommentProductModel.initialize(sequelize);
-    UserCommentModel.initialize(sequelize);
-    BlogCommentModel.initialize(sequelize);
+     // Step 1: No dependencies
+     GenderModel.initialize(sequelize);
+     ProductCategoryModel.initialize(sequelize);
+     BlogCategoryModel.initialize(sequelize);
+     
+     // Step 2: Depends on previous models
+     UserModel.initialize(sequelize);
+     ProductModel.initialize(sequelize);
+     BlogModel.initialize(sequelize);
+ 
+     // Step 3: Depends on UserModel and ProductModel
+     MessageModel.initialize(sequelize);
+     LikeModel.initialize(sequelize);
+     CommentModel.initialize(sequelize);
+     PaymentModel.initialize(sequelize);
+     InvoiceModel.initialize(sequelize);
+     PaymentCardModel.initialize(sequelize);
+     BlockModel.initialize(sequelize);
+     ReportModel.initialize(sequelize);
+ 
+     // Step 4: Through tables
+     UserProductModel.initialize(sequelize);
+     UserCommentModel.initialize(sequelize);
+     BlogCommentModel.initialize(sequelize);
+     CommentProductModel.initialize(sequelize);
 }
 
 // Relations Setup

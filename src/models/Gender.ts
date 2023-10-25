@@ -9,19 +9,17 @@ class Gender extends Model {
     public static initialize(sequelize: Sequelize) {
         Gender.init({
             id: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.INTEGER.UNSIGNED,
                 autoIncrement: true,
-                primaryKey: true
+                primaryKey: true,
             },
-
             name: {
-                type: DataTypes.STRING(50),
+                type: DataTypes.STRING(20),
                 allowNull: false
             }
         }, {
             sequelize,
             modelName: 'gender',
-        
         }
         );
     }

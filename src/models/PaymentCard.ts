@@ -43,7 +43,7 @@ class PaymentCard extends Model {
             }
         }, {
             sequelize,
-            modelName: 'paymentCard',
+            modelName: 'payment_card',
             paranoid:true
 
         });

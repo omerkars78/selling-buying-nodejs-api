@@ -26,7 +26,7 @@ class UserComment extends Model {
             }
         }, {
             sequelize,
-            modelName: 'userComment',
+            modelName: 'user_comment',
             timestamps: true,
             paranoid:true
         });
