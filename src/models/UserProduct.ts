@@ -14,6 +14,7 @@ class UserProduct extends Model {
                     model: User,
                     key: 'id'
                 },
+                onDelete: 'CASCADE',
                 primaryKey: true,
                 allowNull: false,
             },
@@ -23,6 +24,7 @@ class UserProduct extends Model {
                     model: Product,
                     key: 'id'
                 },
+                onDelete: 'CASCADE',
                 primaryKey: true,
                 allowNull: false,
             }

@@ -14,6 +14,7 @@ class UserComment extends Model {
                     model: User,
                     key: 'id'
                 },
+                onDelete: 'CASCADE',
                 primaryKey: true
             },
             commentId: {
@@ -22,6 +23,7 @@ class UserComment extends Model {
                     model: Comment,
                     key: 'id'
                 },
+                onDelete: 'CASCADE',
                 primaryKey: true
             }
         }, {

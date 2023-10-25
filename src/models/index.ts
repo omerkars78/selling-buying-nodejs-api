@@ -13,17 +13,21 @@ import BlockModel from './Block';
 import ReportModel from './Report';
 import UserProductModel from './UserProduct';
 import CommentProductModel from './CommentProduct';
-import UserCommentModel from './UserComment';
-import BlogCommentModel from './UserComment';
+import CommentUserModel from './CommentUser';
+import CommentBlogModel from './CommentBlog';
 import ProductCategoryModel from './ProductCategory';
+import ReportCategoryModel from './ReportCategory'; 
 import BlogModel from './Blog';
 import BlogCategoryModel from './BlogCategory';
+import LikeBlogModel from './LikeBlog';
+import LikeProductModel from './LikeProduct';
 // Models Initialization
 const initializeModels = () => {
      // Step 1: No dependencies
      GenderModel.initialize(sequelize);
      ProductCategoryModel.initialize(sequelize);
      BlogCategoryModel.initialize(sequelize);
+     ReportCategoryModel.initialize(sequelize);
      
      // Step 2: Depends on previous models
      UserModel.initialize(sequelize);
@@ -42,15 +46,16 @@ const initializeModels = () => {
  
      // Step 4: Through tables
      UserProductModel.initialize(sequelize);
-     UserCommentModel.initialize(sequelize);
-     BlogCommentModel.initialize(sequelize);
+     CommentUserModel.initialize(sequelize);
+     CommentBlogModel.initialize(sequelize);
      CommentProductModel.initialize(sequelize);
+     LikeBlogModel.initialize(sequelize);
+     LikeProductModel.initialize(sequelize);
 }
 
 // Relations Setup
 const setupRelations = () => {
-    // UserModel.hasMany(ProductModel, { foreignKey: 'userId' });
-    // ProductModel.belongsTo(UserModel, { foreignKey: 'userId' });
+  
 
     UserModel.hasMany(MessageModel, { foreignKey: 'senderId' });
     MessageModel.belongsTo(UserModel, { foreignKey: 'senderId' });
@@ -70,10 +75,6 @@ const setupRelations = () => {
     ProductModel.belongsTo(ProductCategoryModel, { foreignKey: 'productCategoryId' });
     ProductCategoryModel.hasMany(ProductModel, { foreignKey: 'productCategoryId' });
     
-
-    // ProductModel.hasMany(CommentModel, { foreignKey: 'productId' });
-    // CommentModel.belongsTo(ProductModel, { foreignKey: 'productId' });
-
     UserModel.hasMany(PaymentModel, { foreignKey: 'userId' });
     PaymentModel.belongsTo(UserModel, { foreignKey: 'userId' });
 
@@ -91,29 +92,43 @@ const setupRelations = () => {
 
     UserModel.hasMany(BlockModel, { foreignKey: 'blockerId' });
     UserModel.hasMany(BlockModel, { foreignKey: 'blockedId' });
+    
     BlockModel.belongsTo(UserModel, { foreignKey: 'blockerId' });
     BlockModel.belongsTo(UserModel, { foreignKey: 'blockedId' });
 
     UserModel.hasMany(ReportModel, { foreignKey: 'reporterId' });
     UserModel.hasMany(ReportModel, { foreignKey: 'reportedId' });
+    
     ReportModel.belongsTo(UserModel, { foreignKey: 'reporterId' });
     ReportModel.belongsTo(UserModel, { foreignKey: 'reportedId' });
+    
     UserModel.hasMany(BlogModel, { foreignKey: 'userId' });
     BlogModel.belongsTo(UserModel, { foreignKey: 'userId' });
+    
     BlogCategoryModel.hasMany(BlogModel, { foreignKey: 'blogCategoryId' });
     BlogModel.belongsTo(BlogCategoryModel, { foreignKey: 'blogCategoryId' });
+   
+    ReportCategoryModel.hasMany(ReportModel, { foreignKey: 'reportCategoryId' });
+    ReportModel.belongsTo(ReportCategoryModel, { foreignKey: 'reportCategoryId' });
+
 
     UserModel.belongsToMany(ProductModel, { through: UserProductModel, foreignKey: 'userId' });
     ProductModel.belongsToMany(UserModel, { through: UserProductModel, foreignKey: 'productId' });
 
-    UserModel.belongsToMany(CommentModel, { through: UserCommentModel, foreignKey: 'userId' });
-    CommentModel.belongsToMany(UserModel, { through: UserCommentModel, foreignKey: 'commentId' });
+    UserModel.belongsToMany(CommentModel, { through: CommentUserModel, foreignKey: 'userId' });
+    CommentModel.belongsToMany(UserModel, { through: CommentUserModel, foreignKey: 'commentId' });
     
-    BlogModel.belongsToMany(CommentModel, { through: BlogCommentModel, foreignKey: 'blogId' });
-    CommentModel.belongsToMany(BlogModel, { through: BlogCommentModel, foreignKey: 'commentId' });
+    BlogModel.belongsToMany(CommentModel, { through: CommentBlogModel, foreignKey: 'blogId' });
+    CommentModel.belongsToMany(BlogModel, { through: CommentBlogModel, foreignKey: 'commentId' });
 
     CommentModel.belongsToMany(ProductModel, { through: CommentProductModel, foreignKey: 'commentId' });
     ProductModel.belongsToMany(CommentModel, { through: CommentProductModel, foreignKey: 'productId' });
+
+    LikeModel.belongsToMany(ProductModel, { through: LikeProductModel, foreignKey: 'likeId' });
+    ProductModel.belongsToMany(LikeModel, { through: LikeProductModel, foreignKey: 'productId' });
+
+    LikeModel.belongsToMany(BlogModel, { through: LikeBlogModel, foreignKey: 'likeId' });
+    BlogModel.belongsToMany(LikeModel, { through: LikeBlogModel, foreignKey: 'blogId' });
 
 }
 
@@ -135,10 +150,13 @@ export {
     ReportModel as Report,
     UserProductModel as UserProduct,
     CommentProductModel as CommentProduct,
-    UserCommentModel as UserComment,
+    CommentUserModel as UserComment,
     ProductCategoryModel as ProductCategory,
     BlogModel as Blog,
     BlogCategoryModel as BlogCategory,
-    BlogCommentModel as BlogModel,
+    CommentBlogModel as CommentBlog,
+    LikeProductModel as LikeProduct,
+    LikeBlogModel as LikeBlog,
+    ReportCategoryModel as ReportCategory,
     sequelize
 };

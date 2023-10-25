@@ -14,22 +14,6 @@ class Like extends Model {
                 type: DataTypes.INTEGER,
                 autoIncrement: true,
                 primaryKey: true
-            },
-            userId: {
-                type: DataTypes.INTEGER.UNSIGNED,
-                references: {
-                    model: User,  // Reference the User model directly
-                    key: 'id'
-                },
-                onDelete:'CASCADE'
-            },
-            productId: {
-                type: DataTypes.INTEGER,
-                references: {
-                    model: Product,  // Reference the Product model directly
-                    key: 'id'
-                },
-                onDelete:'CASCADE'
             }
         }, {
             sequelize,

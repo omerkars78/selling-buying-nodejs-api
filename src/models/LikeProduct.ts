@@ -1,36 +1,38 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import Comment from './Comment';
-import Blog from './Blog';
+import Product from './Product';
+import Like from './Like';
 
 
-class BlogComment extends Model {
-    public commentId!: number;
-    public blogId!: number;
+class LikeProduct extends Model {
+    public productId!: number;
+    public likeId!: number;
 
     public static initialize(sequelize: Sequelize) {
-        BlogComment.init({
-            commentId: {
+        LikeProduct.init({
+           likeId: {
                 type: DataTypes.INTEGER.UNSIGNED,
                 primaryKey: true,
                 references: {
-                    model: Comment,
+                    model: Like,
                     key: 'id'
                 },
+                onDelete: 'CASCADE',
             },
-            blogId: {
+            productId: {
                 type: DataTypes.INTEGER.UNSIGNED,
                 primaryKey: true,
                 references: {
-                    model: Blog,
+                    model: Product,
                     key: 'id'
-                }
+                },
+                onDelete: 'CASCADE',
             }
         }, {
-            tableName: 'comment_blog',
+            tableName: 'like_product',
             sequelize: sequelize,
             paranoid:true
         });
     }
 }
 
-export default BlogComment;
+export default LikeProduct;

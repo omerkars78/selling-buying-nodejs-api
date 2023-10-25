@@ -18,6 +18,7 @@ class Block extends Model {
                     model: 'users',
                     key: 'id'
                 },
+                onDelete: 'CASCADE',
                 allowNull: false,
             },
             blockedId: {
@@ -26,6 +27,7 @@ class Block extends Model {
                     model: 'users',
                     key: 'id'
                 },
+                onDelete: 'CASCADE',
                 allowNull: false,
             },
         }, {

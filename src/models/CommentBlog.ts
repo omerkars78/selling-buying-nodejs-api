@@ -1,14 +1,14 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import Comment from './Comment';
-import Product from './Product';
+import Blog from './Blog';
 
 
-class CommentProduct extends Model {
+class CommentBlog extends Model {
     public commentId!: number;
-    public productId!: number;
+    public blogId!: number;
 
     public static initialize(sequelize: Sequelize) {
-        CommentProduct.init({
+        CommentBlog.init({
             commentId: {
                 type: DataTypes.INTEGER.UNSIGNED,
                 primaryKey: true,
@@ -16,23 +16,21 @@ class CommentProduct extends Model {
                     model: Comment,
                     key: 'id'
                 },
-                onDelete: 'CASCADE',
             },
-            productId: {
+            blogId: {
                 type: DataTypes.INTEGER.UNSIGNED,
                 primaryKey: true,
                 references: {
-                    model: Product,
+                    model: Blog,
                     key: 'id'
-                },
-                onDelete: 'CASCADE',
+                }
             }
         }, {
-            tableName: 'comment_product',
+            tableName: 'comment_blog',
             sequelize: sequelize,
             paranoid:true
         });
     }
 }
 
-export default CommentProduct;
+export default CommentBlog;

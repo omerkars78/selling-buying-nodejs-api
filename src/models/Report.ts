@@ -6,6 +6,7 @@ class Report extends Model {
     public reporterId!: number;
     public reportedId!: number;
     public reason!: string;
+    public reportCategoryId! : number;
 
     public static initialize(sequelize: Sequelize) {
         Report.init({
@@ -20,6 +21,16 @@ class Report extends Model {
                     model: 'users',
                     key: 'id'
                 },
+                onDelete: 'CASCADE',
+                allowNull: false,
+            },
+            reportCategoryId: {
+                type: DataTypes.INTEGER.UNSIGNED,
+                references: {
+                    model: 'users',
+                    key: 'id'
+                },
+                onDelete: 'CASCADE',
                 allowNull: false,
             },
             reportedId: {
@@ -28,6 +39,7 @@ class Report extends Model {
                     model: 'users',
                     key: 'id'
                 },
+                onDelete: 'CASCADE',
                 allowNull: false,
             },
             reason: {
