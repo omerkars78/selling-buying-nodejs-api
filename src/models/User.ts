@@ -4,6 +4,7 @@ import Gender from './Gender';
 class User extends Model {
     public id!: number;
     public name!: string;
+    public surname!: string;
     public genderId!: number;
     public birthday!: Date;
     public email!: string;
@@ -25,6 +26,14 @@ class User extends Model {
                 primaryKey: true,
             },
             name: {
+                type: new DataTypes.STRING(128),
+                allowNull: false,
+            },
+            surname: {
+                type: new DataTypes.STRING(128),
+                allowNull: false,
+            },
+            nickname: {
                 type: new DataTypes.STRING(128),
                 allowNull: false,
             },
