@@ -1,11 +1,12 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import Comment from './Comment';
 import Product from './Product';
-
+import User from './User';
 
 class CommentProduct extends Model {
     public commentId!: number;
     public productId!: number;
+    public userId!: number;
 
     public static initialize(sequelize: Sequelize) {
         CommentProduct.init({
@@ -23,6 +24,15 @@ class CommentProduct extends Model {
                 primaryKey: true,
                 references: {
                     model: Product,
+                    key: 'id'
+                },
+                onDelete: 'CASCADE',
+            },
+            userId:{
+                type: DataTypes.INTEGER.UNSIGNED,
+                primaryKey: true,
+                references: {
+                    model: User,
                     key: 'id'
                 },
                 onDelete: 'CASCADE',

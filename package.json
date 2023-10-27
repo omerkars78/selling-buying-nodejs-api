@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node src/app.ts"
-    
   },
   "keywords": [],
   "author": "",
@@ -24,6 +23,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@types/bcrypt": "^5.0.1",
     "acorn": "^8.10.0",
     "acorn-walk": "^8.2.0",
     "anymatch": "^3.1.3",

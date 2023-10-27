@@ -1,6 +1,7 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import sequelize from '../config/database';
-
+import User from './User';
+import ReportCategory from './ReportCategory';
 class Report extends Model {
     public id!: number;
     public reporterId!: number;
@@ -18,7 +19,7 @@ class Report extends Model {
             reporterId: {
                 type: DataTypes.INTEGER.UNSIGNED,
                 references: {
-                    model: 'users',
+                    model: User,
                     key: 'id'
                 },
                 onDelete: 'CASCADE',
@@ -27,7 +28,7 @@ class Report extends Model {
             reportCategoryId: {
                 type: DataTypes.INTEGER.UNSIGNED,
                 references: {
-                    model: 'users',
+                    model: ReportCategory,
                     key: 'id'
                 },
                 onDelete: 'CASCADE',
