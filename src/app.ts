@@ -27,13 +27,12 @@
 
 // initializeDatabase();
 // app.ts
-import express from 'express';
+import express, { Application } from 'express';
 import { sequelize, User, Product, Message, Like, Comment, Payment, Invoice, PaymentCard } from './models';
 import cors from 'cors';
+import * as authRoutes from './routes/auth';
 
-// Diğer import ifadeleri ...
-
-const app = express();
+const app: Application = express();
 const PORT = 3000;
 
 // CORS politikasını etkinleştir
@@ -42,14 +41,21 @@ app.use(cors({
     credentials: true,
 }));
 
-// Diğer middleware ve rotalar ...
+app.use(express.json());
+
+// authRoutes'u burada tanımlayın ve '/auth' önekini kullanarak ekleyin
+app.use('/auth', authRoutes);
+
+app.get('/', (req, res) => {
+    res.send('API is running...');
+});
 
 const initializeDatabase = async () => {
     try {
         await sequelize.authenticate();
         console.log('Database connection has been established successfully.');
 
-        await sequelize.sync({force:true});
+        await sequelize.sync({ force: true });
 
         app.listen(PORT, () => {
             console.log(`Server is running on http://localhost:${PORT}`);
