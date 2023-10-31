@@ -35,13 +35,16 @@ class UserService {
         return await User.findAll();
     }
 
-    // Kullanıcıyı sil
     static async deleteUser(userId: number): Promise<void> {
-        await User.destroy({
-            where: {
-                id: userId
-            }
-        });
+        await User.destroy({ where: { id: userId } });
+    }
+    
+    static async freezeUser(userId: number): Promise<void> {
+        await User.update({ isFrozen: true }, { where: { id: userId } });
+    }
+
+    static async unfreezeUser(userId: number): Promise<void> {
+        await User.update({ isFrozen: false }, { where: { id: userId } });
     }
 
 

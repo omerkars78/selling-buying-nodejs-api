@@ -18,6 +18,7 @@ class User extends Model {
     public dsitrict?: string;
     public school!: string;
     public detailedAddress! : string;
+    public isFrozen!: boolean;
     public static initialize(sequelize: Sequelize) {
         User.init({
             id: {
@@ -77,6 +78,11 @@ class User extends Model {
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
                 defaultValue: false, // Eğer kullanıcı doğrulanmadıysa default değeri false olarak alabilirsiniz.
+            },
+            isFrozen: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+                defaultValue: false,  // Default value is 'false' indicating the account is not frozen
             },
             isAdmin: {
                 type: DataTypes.BOOLEAN,

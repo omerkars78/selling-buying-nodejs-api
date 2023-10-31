@@ -9,5 +9,9 @@ router.post('/reset-password', authController.resetPassword);
 router.get('/profile', authController.getProfile);
 router.put('/update-profile', authController.updateProfile);
 router.post('/logout', authController.logout);
+router.post('/:userId/freeze', authController.freezeUser);
+router.post('/:userId/unfreeze', authController.unfreezeUser);
+router.delete('/:userId', authController.deleteUser);
+
 
 export default router;

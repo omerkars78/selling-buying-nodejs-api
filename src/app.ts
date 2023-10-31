@@ -30,7 +30,7 @@
 import express, { Application } from 'express';
 import { sequelize, User, Product, Message, Like, Comment, Payment, Invoice, PaymentCard } from './models';
 import cors from 'cors';
-import * as authRoutes from './routes/auth';
+import authRoutes from './routes/auth';
 
 const app: Application = express();
 const PORT = 3000;
