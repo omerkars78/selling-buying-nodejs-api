@@ -21,7 +21,7 @@ import BlogCategoryModel from './BlogCategory';
 import LikeBlogModel from './LikeBlog';
 import LikeProductModel from './LikeProduct';
 import FollowUserModel from './FollowUser';
-import User from './User';
+import UserTypeModel from './UserType';
 // Models Initialization
 const initializeModels = () => {
      // Step 1: No dependencies
@@ -29,6 +29,7 @@ const initializeModels = () => {
      ProductCategoryModel.initialize(sequelize);
      BlogCategoryModel.initialize(sequelize);
      ReportCategoryModel.initialize(sequelize);
+     UserTypeModel.initialize(sequelize);
      
      // Step 2: Depends on previous models
      UserModel.initialize(sequelize);
@@ -73,6 +74,10 @@ const setupRelations = () => {
 
     UserModel.belongsTo(GenderModel, { foreignKey: 'genderId' });
     GenderModel.hasMany(UserModel, { foreignKey: 'genderId' });
+
+    UserModel.belongsTo(UserTypeModel, { foreignKey: 'userType' });
+    UserTypeModel.hasMany(UserModel, { foreignKey: 'userType' });
+    
 
     ProductModel.belongsTo(ProductCategoryModel, { foreignKey: 'productCategoryId' });
     ProductCategoryModel.hasMany(ProductModel, { foreignKey: 'productCategoryId' });

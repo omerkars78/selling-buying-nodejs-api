@@ -1,6 +1,7 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import sequelize from '../config/database';  // Corrected import
 import Gender from './Gender';  
+import UserType from './UserType';
 class User extends Model {
     public id!: number;
     public name!: string;
@@ -12,7 +13,7 @@ class User extends Model {
     public profileImage?: string;
     public verificationCode?: string;
     public verified!: boolean;
-    public userType?: string;
+    public userType?: number;
     public country?: string;
     public city!: string;
     public dsitrict?: string;
@@ -90,9 +91,12 @@ class User extends Model {
                 defaultValue: false, // Eğer kullanıcı doğrulanmadıysa default değeri false olarak alabilirsiniz.
             },
             userType: {
-                type: DataTypes.BOOLEAN,
-                allowNull: false,
-                defaultValue: false, 
+                type: DataTypes.INTEGER.UNSIGNED,  
+                references: {
+                    model: UserType,
+                    key: 'id'
+                },
+                onDelete:'CASCADE'
             },
             country: {
                 type: new DataTypes.STRING(128),
