@@ -20,6 +20,8 @@ import BlogModel from './Blog';
 import BlogCategoryModel from './BlogCategory';
 import LikeBlogModel from './LikeBlog';
 import LikeProductModel from './LikeProduct';
+import FollowUserModel from './FollowUser';
+import User from './User';
 // Models Initialization
 const initializeModels = () => {
      // Step 1: No dependencies
@@ -50,6 +52,7 @@ const initializeModels = () => {
      CommentProductModel.initialize(sequelize);
      LikeBlogModel.initialize(sequelize);
      LikeProductModel.initialize(sequelize);
+     FollowUserModel.initialize(sequelize);
 }
 
 // Relations Setup
@@ -127,7 +130,16 @@ const setupRelations = () => {
 
     LikeModel.belongsToMany(BlogModel, { through: LikeBlogModel, foreignKey: 'likeId' });
     BlogModel.belongsToMany(LikeModel, { through: LikeBlogModel, foreignKey: 'blogId' });
-
+    UserModel.belongsToMany(UserModel, { 
+        through: FollowUserModel, 
+        foreignKey: 'followerId',
+        as: 'Followers' 
+    });
+    UserModel.belongsToMany(UserModel, { 
+        through: FollowUserModel, 
+        foreignKey: 'followedId',
+        as: 'Following' 
+    });
 }
 
 // Initialize and Setup
@@ -156,5 +168,6 @@ export {
     LikeProductModel as LikeProduct,
     LikeBlogModel as LikeBlog,
     ReportCategoryModel as ReportCategory,
+    FollowUserModel as FollowUser,
     sequelize
 };
