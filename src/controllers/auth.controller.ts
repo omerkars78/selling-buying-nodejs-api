@@ -2,13 +2,18 @@ import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import UserService from '../services/UserService';
+import { registerSchema, loginSchema } from '../validation/authValidation'; 
+import { validationMiddleware } from '../middleware/validationMiddleware'; 
+
 
 export const signup = async (req: Request, res: Response) => {
     try {
-        const { password } = req.body;
-        if (!password || password === '') {
-            throw new Error('Password is required.');
+        const validation = registerSchema.validate(req.body);
+        if (validation.error) {
+            throw new Error(validation.error.details[0].message);
         }
+
+        const { password } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await UserService.createUser({ ...req.body, password: hashedPassword });
         res.status(201).send(user);
@@ -22,8 +27,14 @@ export const signup = async (req: Request, res: Response) => {
 };
 
 
+
 export const login = async (req: Request, res: Response) => {
     try {
+        const validation = loginSchema.validate(req.body);
+        if (validation.error) {
+            throw new Error(validation.error.details[0].message);
+        }
+
         const user = await UserService.getUserByEmail(req.body.email);
         if (!user) {
             return res.status(400).send('User not found.');
@@ -44,6 +55,7 @@ export const login = async (req: Request, res: Response) => {
         }
     }
 };
+
 
 export const resetPassword = async (req: Request, res: Response) => {
     try {
