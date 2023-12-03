@@ -6,6 +6,7 @@ class User extends Model {
     public id!: number;
     public name!: string;
     public surname!: string;
+    public nickname!: string;
     public genderId!: number;
     public birthday!: Date;
     public email!: string;
@@ -45,7 +46,8 @@ class User extends Model {
                     model: Gender,
                     key: 'id'
                 },
-                onDelete:'CASCADE'
+                onDelete:'CASCADE',
+                allowNull : false
             },
             birthday: {
                 type: DataTypes.DATE,
